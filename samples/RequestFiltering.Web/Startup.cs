@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using RequestFiltering.FileExtensions;
+using System.Collections.Generic;
 
 namespace RequestFiltering.Web
 {
@@ -13,14 +11,33 @@ namespace RequestFiltering.Web
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            app.Run(async (context) =>
+            loggerFactory.AddConsole(LogLevel.Debug);
+
+            if (env.IsDevelopment())
             {
-                await context.Response.WriteAsync("Hello World!");
-            });
+                app.UseDeveloperExceptionPage();
+            }
+
+            var options = new RequestFilteringOptions()
+                .AddFileExtensionRequestFilter(new FileExtensionsOptions
+                {
+                    FileExtensionsCollection = new List<FileExtensionsElement>
+                    {
+                        new FileExtensionsElement() { FileExtension = ".jpg", Allowed = true },
+                        new FileExtensionsElement() { FileExtension = ".psd", Allowed = false }
+                    }
+                });
+
+            app.UseRequestFiltering(options);
+
+            app.UseStaticFiles();
+
+            app.UseMvc();
         }
     }
 }
