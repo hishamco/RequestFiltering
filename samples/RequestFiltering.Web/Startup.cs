@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RequestFiltering.FileExtensions;
+using RequestFiltering.Headers;
 using RequestFiltering.HiddenSegments;
 using RequestFiltering.HttpVerbs;
 using RequestFiltering.QueryStrings;
@@ -57,6 +58,13 @@ namespace RequestFiltering.Web
                     HiddenSegmentsCollection = new List<HiddenSegmentElement>
                     {
                         new HiddenSegmentElement() { Segment = "Private" }
+                    }
+                })
+                .AddHeaderRequestFilter(new HeadersOptions
+                {
+                    HeadersCollection = new List<HeaderElement>
+                    {
+                        new HeaderElement() { Header = "X-Auth", SizeLimit = 5 }
                     }
                 });
 

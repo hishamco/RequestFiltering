@@ -13,6 +13,7 @@
     },
     "RequestFiltering": "1.0.0-*",
     "RequestFiltering.FileExtensions": "1.0.0-*",
+    "RequestFiltering.Headers": "1.0.0-*",
     "RequestFiltering.HiddenSegments": "1.0.0-*",
     "RequestFiltering.HttpVerbs": "1.0.0-*",
     "RequestFiltering.QueryStrings": "1.0.0-*"

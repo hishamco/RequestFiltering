@@ -17,3 +17,17 @@
 
 <h3>Hidden Segments Filter</h3>
 <a href="~/PSDs/Hisham.psd">Deny "Private" segment</a>
+
+<h3>Headers Filter</h3>
+<a href="#" onclick="requestWithHeader(['X-Auth','true']);">Allow "X-Auth" header with size less than or eqal 5 bytes</a><br/>
+<a href="#" onclick="requestWithHeader(['X-Auth', 'invalid']);">Deny "X-Auth" header with size greater than 5 bytes</a>
+
+<script>
+    function requestWithHeader(header) {
+        var xhr = new XMLHttpRequest()
+        xhr.open("GET", "/", true);
+        xhr.setRequestHeader(header[0], header[1]);
+
+        xhr.send();
+    }
+</script>
