@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RequestFiltering.FileExtensions;
+using RequestFiltering.HiddenSegments;
 using RequestFiltering.HttpVerbs;
 using RequestFiltering.QueryStrings;
 using System.Collections.Generic;
@@ -49,6 +50,13 @@ namespace RequestFiltering.Web
                     {
                         new QueryStringElement() { QueryString = "id", Allowed = true },
                         new QueryStringElement() { QueryString = "name", Allowed = false }
+                    }
+                })
+                .AddHiddenSegmentRequestFilter(new HiddenSegmentsOptions
+                {
+                    HiddenSegmentsCollection = new List<HiddenSegmentElement>
+                    {
+                        new HiddenSegmentElement() { Segment = "Private" }
                     }
                 });
 
