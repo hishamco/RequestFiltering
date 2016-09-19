@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RequestFiltering.FileExtensions;
 using RequestFiltering.HttpVerbs;
+using RequestFiltering.QueryStrings;
 using System.Collections.Generic;
 
 namespace RequestFiltering.Web
@@ -39,6 +40,15 @@ namespace RequestFiltering.Web
                     HttpVerbsCollection = new List<HttpVerbElement>
                     {
                         new HttpVerbElement() { Verb = HttpVerb.Get, Allowed = true }
+                    }
+                })
+                .AddQueryStringRequestFilter(new QueryStringsOptions
+                {
+                    AllowUnlisted = false,
+                    QueryStringsCollection = new List<QueryStringElement>
+                    {
+                        new QueryStringElement() { QueryString = "id", Allowed = true },
+                        new QueryStringElement() { QueryString = "name", Allowed = false }
                     }
                 });
 

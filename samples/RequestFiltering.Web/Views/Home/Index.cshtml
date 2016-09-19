@@ -9,3 +9,8 @@
 <form action="/" method="post">
     <a href="javascript:{}" onclick="document.forms[0].submit();">Deny non GET verb</a>
 </form>
+
+<h3>Query Strings Filter</h3>
+<a href="/?id=1">Allow "id" query string</a><br />
+<a href="/?name=Jon">Deny "name" query string</a><br />
+<a href="/?level=1st">Deny other than "id" query string</a>
