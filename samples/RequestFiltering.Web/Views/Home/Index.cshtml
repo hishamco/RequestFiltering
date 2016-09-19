@@ -3,3 +3,9 @@
 <h3>File Extensions Filter</h3>
 <a href="~/Images/Hisham.jpg">Allow jpg files</a><br/>
 <a href="~/PSDs/Hisham.psd">Deny psd files</a>
+
+<h3>HTTP Verbs Filter</h3>
+<a href="/">Allow GET verb</a><br />
+<form action="/" method="post">
+    <a href="javascript:{}" onclick="document.forms[0].submit();">Deny non GET verb</a>
+</form>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RequestFiltering.FileExtensions;
+using RequestFiltering.HttpVerbs;
 using System.Collections.Generic;
 
 namespace RequestFiltering.Web
@@ -30,6 +31,14 @@ namespace RequestFiltering.Web
                     {
                         new FileExtensionsElement() { FileExtension = ".jpg", Allowed = true },
                         new FileExtensionsElement() { FileExtension = ".psd", Allowed = false }
+                    }
+                })
+                .AddHttpVerbRequestFilter(new HttpVerbsOptions
+                {
+                    AllowUnlisted = false,
+                    HttpVerbsCollection = new List<HttpVerbElement>
+                    {
+                        new HttpVerbElement() { Verb = HttpVerb.Get, Allowed = true }
                     }
                 });
 
