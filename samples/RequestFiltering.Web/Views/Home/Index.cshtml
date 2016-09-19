@@ -22,6 +22,10 @@
 <a href="#" onclick="requestWithHeader(['X-Auth','true']);">Allow "X-Auth" header with size less than or eqal 5 bytes</a><br/>
 <a href="#" onclick="requestWithHeader(['X-Auth', 'invalid']);">Deny "X-Auth" header with size greater than 5 bytes</a>
 
+<h3>Urls Filter</h3>
+<a href="/Home">Allow "/Home" url</a><br/>
+<a href="/?name=me">Deny "me" url sequence</a>
+
 <script>
     function requestWithHeader(header) {
         var xhr = new XMLHttpRequest()

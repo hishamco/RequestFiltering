@@ -7,6 +7,7 @@ using RequestFiltering.Headers;
 using RequestFiltering.HiddenSegments;
 using RequestFiltering.HttpVerbs;
 using RequestFiltering.QueryStrings;
+using RequestFiltering.Urls;
 using System.Collections.Generic;
 
 namespace RequestFiltering.Web
@@ -66,6 +67,11 @@ namespace RequestFiltering.Web
                     {
                         new HeaderElement() { Header = "X-Auth", SizeLimit = 5 }
                     }
+                })
+                .AddUrlRequestFilter(new UrlsOptions
+                {
+                    DeniedUrlSequences = new[] { "me" },
+                    AllowedUrls = new[] { "/Home" }
                 });
 
             app.UseRequestFiltering(options);
