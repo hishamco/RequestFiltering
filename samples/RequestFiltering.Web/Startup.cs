@@ -6,7 +6,9 @@ using RequestFiltering.FileExtensions;
 using RequestFiltering.Headers;
 using RequestFiltering.HiddenSegments;
 using RequestFiltering.HttpVerbs;
+using RequestFiltering.IPAddress;
 using RequestFiltering.QueryStrings;
+using RequestFiltering.SqlInjection;
 using RequestFiltering.Urls;
 using System.Collections.Generic;
 
@@ -73,6 +75,15 @@ namespace RequestFiltering.Web
                     DeniedUrlSequences = new[] { "me" },
                     AllowedUrls = new[] { "/Home" }
                 });
+
+                // Uncomment the following line to filter using IP address
+                /*.AddIPAddressRequestFilter(new IPAddressOptions
+                {
+                    IPAddresses = new[] { "::1" }
+                })*/
+
+                // Uncomment following line to filter the SQL injection
+                //.AddSqlInjectionRequestFilter();
 
             app.UseRequestFiltering(options);
 
